@@ -40,7 +40,7 @@ app.get("/api/:date_string", (req, res) => {
     if (dateObject.toString() === "Invalid Date") {
       res.json({ error: "Invalid Date" });
     } else {
-      res.json({ unix: dateObject.valueOf(), utc: dateObject.toUTCString() });
+      res.json({ unix: dateObject.valueOf().replace('"',""), utc: dateObject.toUTCString() });
     }
   }
 });
