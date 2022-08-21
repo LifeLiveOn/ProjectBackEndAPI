@@ -71,6 +71,13 @@ app.post("/api/shorturl", async function(req, res){
   return res.json({error: "Invalid url"})
 })
 
+app.get("/api/shorturl/:id", async function(req,res){
+  var id = req.params.id
+  var url = await URL.findOne({short_url:id});
+  return res.json(url['original_url'])
+})
+
+
 // your first API endpoint... 
 app.get("/api/:date_string", (req, res) => {
   let dateString = req.params.date_string;
