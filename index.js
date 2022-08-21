@@ -10,17 +10,14 @@ const requestIp = require('request-ip');
 var cors = require('cors');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static('public'));
+require('dotenv').config();
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
-});
+// Basic Configuration
+const port = process.env.PORT || 3000;
 
+app.use('/public', express.static(`${process.cwd()}/public`));
 
 
-// lam mongoose connect toi 1 database voi model la URLSHORTERNER bao gom 2 thu trong do, URL, generated id
 mongoose.connect(process.env.MONGO_URI2,{
   useNewUrlParser: true,
   useFindAndModify: false,
@@ -33,6 +30,14 @@ const URLSHORTERNER = new Schema({
 })
 
 const URL = mongoose.model('URL', URLSHORTERNER);
+
+app.get('/', function(req, res) {
+  res.sendFile(process.cwd() + '/views/index.html');
+});
+
+
+// lam mongoose connect toi 1 database voi model la URLSHORTERNER bao gom 2 thu trong do, URL, generated id
+
 
 
 app.get("/api/",function (req, res) {
@@ -72,6 +77,13 @@ app.get("/api/:date_string", (req, res) => {
 
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+
+
+// Your first API endpoint
+app.get('/api/hello', function(req, res) {
+  res.json({ greeting: 'hello API' });
+});
+
+app.listen(port, function() {
+  console.log(`Listening on port ${port}`);
 });
