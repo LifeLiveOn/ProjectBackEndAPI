@@ -17,11 +17,8 @@ const port = process.env.PORT || 3000;
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 
-mongoose.connect(process.env.MONGO_URI2,{
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true
-})
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URI2, { useNewUrlParser: true, useUnifiedTopology: true });
 const { Schema } = mongoose;
 const URLSHORTERNER = new Schema({
   url:{type:String,required:true},
