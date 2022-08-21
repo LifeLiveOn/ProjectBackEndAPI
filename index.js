@@ -59,7 +59,7 @@ app.get("/api/whoami",function(req,res){
 
 
 // handle SHORT URL request
-app.post("/api/shorturl",function(req, res){
+app.post("/api/shorturl", async function(req, res){
   
   var url = req.body.url
   if(isValidUrl(url)){
