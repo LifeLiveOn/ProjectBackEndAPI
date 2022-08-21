@@ -74,8 +74,7 @@ app.post("/api/shorturl",function(req, res){
         done(null, data)
       })
     }
-    console.log(geturl)
-    return res.json({original_url:url})
+    return res.json({original_url:url, short_url:geturl})
   }
   return res.json({error: "Invalid url"})
 })
