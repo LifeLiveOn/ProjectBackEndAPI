@@ -31,7 +31,7 @@ const { Schema } = mongoose;
 
 const URLSHORTERNER = new Schema({
   original_url:{type:String,required:true},
-  short_url:{type:Number,required:true},
+  short_url:{type:Number},
 })
 
 URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'});
