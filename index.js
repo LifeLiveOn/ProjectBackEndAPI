@@ -4,7 +4,7 @@
 // init project
 var express = require('express');
 var app = express();
-
+const requestIp = require('request-ip');
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
@@ -22,6 +22,14 @@ app.get("/", function (req, res) {
 app.get("/api/",function (req, res) {
   let dataObject = new Date();
   res.json({unix:dataObject.valueOf(), utc: dataObject.toUTCString()});
+})
+
+app.get("/api/whoami",function(req,res){
+  let header = req.headers
+  let lang = req.headers['accept-language']
+  let software = req.headers['user-agent']
+  const clientIp = requestIp.getClientIp(req);
+  res.json({ipaddress:clientIp,lang:lang, software:software})
 })
 
 // your first API endpoint... 
@@ -44,6 +52,8 @@ app.get("/api/:date_string", (req, res) => {
     }
   }
 });
+
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
