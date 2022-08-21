@@ -66,7 +66,10 @@ app.post("/api/shorturl",function(req, res){
     var urlObject = new URL({original_url:url})
     urlObject.save()
 
-    var findURLid = URL.find()
+    var findURLid = URL.find(function(err,data){
+      if (err) return console.error(err);
+      return data
+    })
     return res.json(findURLid)
   }
   return res.json({error: "Invalid url"})
