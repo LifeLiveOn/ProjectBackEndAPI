@@ -35,7 +35,7 @@ const URLSHORTERNER = new Schema({
 })
 
 URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'});
-
+console.log(URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'});)
 const URL = mongoose.model('URL', URLSHORTERNER);
 
 app.get('/', function(req, res) {
