@@ -63,12 +63,15 @@ const isValidUrl = urlString=> {
 }
 
 // handle SHORT URL request
-app.post("/api/shorturl",function(req, res){
+app.post("/api/shorturl",function(req, res, done){
   
   var url = req.body.url
   if(isValidUrl(url)){
     var urlObject = new URL({original_url:url})
-    urlObject.save();
+    urlObject.save(function(err,data){
+      if(err){ return console.log(err) }
+      done(null, data)
+    });
   }
 
 })
