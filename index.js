@@ -64,9 +64,9 @@ app.post("/api/shorturl",function(req, res){
   var url = req.body.url
   if(isValidUrl(url)){
     var urlObject = new URL({original_url:url})
-    urlObject.save()
+    await urlObject.save()
 
-    var id = AutoIncrement.find({}).select('seq')
+    var shortId = await URL.findOne({original_url:url}).select('short_url');
     return res.json({original_url:url, short_url: id})
   }
   return res.json({error: "Invalid url"})
