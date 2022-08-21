@@ -67,7 +67,8 @@ app.post("/api/shorturl",function(req, res){
   
   var url = req.body.url
   if(isValidUrl(url)){
-    var urlObject = new URL({original_url:url,shorturl:})
+    var urlObject = new URL({original_url:url})
+    urlObject.save();
   }
 
 })
