@@ -3,7 +3,6 @@ function isValidUrl(string) {
   var regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
   return regex.test(string)
 }
-console.log(isValidUrl("https://forum.freecodecamp.org/"))
 
 
 // where your node app starts
