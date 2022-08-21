@@ -68,6 +68,8 @@ app.post("/api/shorturl",function(req, res){
   if(isValidUrl(url)){
     var urlObject = new URL({original_url:url})
     urlObject.save()
+    var geturl = URL.findOne({original_url:url}).exec();
+    console.log(geturl)
     res.json({original_url:url})
   }
   res.json({error: "Invalid url"})
