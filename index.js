@@ -74,7 +74,7 @@ app.post("/api/shorturl", async function(req, res){
 app.get("/api/shorturl/:id", async function(req,res){
   var id = req.params.id
   var url = await URL.findOne({short_url:id});
-  return res.json(url['original_url'])
+  return res.redirect(url['original_url'])
 })
 
 
