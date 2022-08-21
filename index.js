@@ -47,6 +47,13 @@ app.get("/api/whoami",function(req,res){
   res.json({ipaddress:clientIp,language:lang, software:software})
 })
 
+
+// handle SHORT URL request
+app.post("/api/shorturl",function(req, res){
+  let url = req.body['url_input'];
+  console.log(url);
+})
+
 // your first API endpoint... 
 app.get("/api/:date_string", (req, res) => {
   let dateString = req.params.date_string;
