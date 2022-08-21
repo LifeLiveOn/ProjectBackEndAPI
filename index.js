@@ -68,7 +68,12 @@ app.post("/api/shorturl",function(req, res){
   if(isValidUrl(url)){
     var urlObject = new URL({original_url:url})
     urlObject.save()
-    var geturl = URL.findOne({original_url:url}).exec();
+    var geturl = function(url,done){
+      URL.findOne({original_url:url},function(err,data){
+        if(err){ return console.error(err)}
+        done(null, data)
+      })
+    }
     console.log(geturl)
     res.json({original_url:url})
   }
