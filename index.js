@@ -1,6 +1,7 @@
 // index.js
 // where your node app starts
 var mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 // init project
 var express = require('express');
 const bodyParser = require('body-parser')
@@ -20,10 +21,14 @@ app.use('/public', express.static(`${process.cwd()}/public`));
 
 mongoose.connect(process.env.MONGO_URI2, { useNewUrlParser: true, useUnifiedTopology: true });
 const { Schema } = mongoose;
+
+
 const URLSHORTERNER = new Schema({
-  url:{type:String,required:true},
-  shortID:{type:Number,required:true},
+  original_url:{type:String,required:true},
+  short_url:{type:Number,required:true},
 })
+
+URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'});
 
 const URL = mongoose.model('URL', URLSHORTERNER);
 
@@ -33,8 +38,6 @@ app.get('/', function(req, res) {
 
 
 // lam mongoose connect toi 1 database voi model la URLSHORTERNER bao gom 2 thu trong do, URL, generated id
-
-
 
 app.get("/api/",function (req, res) {
   let dataObject = new Date();
@@ -50,10 +53,23 @@ app.get("/api/whoami",function(req,res){
 })
 
 
+const isValidUrl = urlString=> {
+  try { 
+    return Boolean(new URL(urlString)); 
+  }
+  catch(e){ 
+    return false; 
+  }
+}
+
 // handle SHORT URL request
 app.post("/api/shorturl",function(req, res){
+  
   var url = req.body.url
-  console.log(url);
+  if(isValidUrl(url)){
+    var urlObject = new URL({original_url:url,shorturl:})
+  }
+
 })
 
 // your first API endpoint... 
