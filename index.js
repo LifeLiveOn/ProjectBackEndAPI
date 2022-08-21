@@ -1,4 +1,11 @@
 // index.js
+function isValidUrl(string) {
+  var regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+  return regex.test(string)
+}
+console.log(isValidUrl("https://forum.freecodecamp.org/"))
+
+
 // where your node app starts
 var mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose);
@@ -53,14 +60,7 @@ app.get("/api/whoami",function(req,res){
 })
 
 
-const isValidUrl = urlString=> {
-  try { 
-    return Boolean(new URL(urlString)); 
-  }
-  catch(e){ 
-    return false; 
-  }
-}
+
 
 // handle SHORT URL request
 app.post("/api/shorturl",function(req, res){
