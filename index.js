@@ -50,7 +50,7 @@ app.get("/api/whoami",function(req,res){
 
 // handle SHORT URL request
 app.post("/api/shorturl",function(req, res){
-  let url = req.body['url_input'];
+  let url = req.body['url'];
   console.log(url);
 })
 
