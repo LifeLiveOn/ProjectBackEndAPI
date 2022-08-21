@@ -36,7 +36,6 @@ const URLSHORTERNER = new Schema({
 
 URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'});
 const URL = mongoose.model('URL', URLSHORTERNER);
-const count = mongoose.model('counters')
 app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
