@@ -3,7 +3,9 @@
 var mongoose = require('mongoose')
 // init project
 var express = require('express');
+const bodyParser = require('body-parser')
 var app = express();
+app.use(bodyParser.urlencoded({extended: true}));
 const requestIp = require('request-ip');
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
@@ -50,7 +52,7 @@ app.get("/api/whoami",function(req,res){
 
 // handle SHORT URL request
 app.post("/api/shorturl",function(req, res){
-  let url = req.body.url
+  var url = req.body.url
   console.log(url);
 })
 
