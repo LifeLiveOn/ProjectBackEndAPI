@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGO_URI2,{
   useFindAndModify: false,
   useUnifiedTopology: true
 })
-
+const { Schema } = mongoose;
 const URLSHORTERNER = new Schema({
   url:{type:String,required:true},
   shortID:{type:Number,required:true},
