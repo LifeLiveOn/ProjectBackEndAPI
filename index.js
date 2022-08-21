@@ -36,7 +36,7 @@ const URLSHORTERNER = new Schema({
 
 URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'});
 const URL = mongoose.model('URL', URLSHORTERNER);
-
+const count = mongoose.model('counters')
 app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
@@ -66,7 +66,7 @@ app.post("/api/shorturl",function(req, res){
     var urlObject = new URL({original_url:url})
     urlObject.save()
 
-    var id = counters.find({}).select('seq')
+    var id = AutoIncrement.find({}).select('seq')
     return res.json({original_url:url, short_url: id})
   }
   return res.json({error: "Invalid url"})
