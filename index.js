@@ -66,7 +66,7 @@ app.post("/api/shorturl", async function(req, res){
     await urlObject.save()
 
     var shortId = await URL.findOne({original_url:url}).select('short_url');
-    return res.json({original_url:url, short_url: shortId})
+    return res.json({original_url:url, short_url: shortId['short_url']})
   }
   return res.json({error: "Invalid url"})
 })
