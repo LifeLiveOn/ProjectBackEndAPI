@@ -75,9 +75,9 @@ app.post("/api/shorturl",function(req, res){
       })
     }
     console.log(geturl)
-    res.json({original_url:url})
+    return res.json({original_url:url})
   }
-  res.json({error: "Invalid url"})
+  return res.json({error: "Invalid url"})
 })
 
 // your first API endpoint... 
