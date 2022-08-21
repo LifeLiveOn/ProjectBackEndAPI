@@ -10,7 +10,6 @@ const requestIp = require('request-ip');
 var cors = require('cors');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
-require('dotenv').config();
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
