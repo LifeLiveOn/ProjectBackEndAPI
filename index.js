@@ -35,7 +35,6 @@ const URLSHORTERNER = new Schema({
 })
 
 URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'});
-console.log(URLSHORTERNER.plugin(AutoIncrement, {inc_field: 'short_url'}))
 const URL = mongoose.model('URL', URLSHORTERNER);
 
 app.get('/', function(req, res) {
@@ -59,8 +58,6 @@ app.get("/api/whoami",function(req,res){
 })
 
 
-
-
 // handle SHORT URL request
 app.post("/api/shorturl",function(req, res){
   
@@ -68,7 +65,9 @@ app.post("/api/shorturl",function(req, res){
   if(isValidUrl(url)){
     var urlObject = new URL({original_url:url})
     urlObject.save()
-    return res.json(urlObject)
+
+    var findURLid = URL.find()
+    return res.json(findURLid)
   }
   return res.json({error: "Invalid url"})
 })
