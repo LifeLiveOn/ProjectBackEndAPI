@@ -1,6 +1,6 @@
 // index.js
 // where your node app starts
-
+var mongoose = require('mongoose')
 // init project
 var express = require('express');
 var app = express();
@@ -17,6 +17,22 @@ app.use(express.static('public'));
 app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
+
+
+
+// lam mongoose connect toi 1 database voi model la URLSHORTERNER bao gom 2 thu trong do, URL, generated id
+mongoose.connect(process.env.MONGO_URI2,{
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+})
+
+const URLSHORTERNER = new Schema({
+  url:{type:String,required:true},
+  shortID:{type:Number,required:true},
+})
+
+const URL = mongoose.model('URL', URLSHORTERNER);
 
 
 app.get("/api/",function (req, res) {
